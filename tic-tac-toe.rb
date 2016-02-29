@@ -3,8 +3,8 @@ require "pry"
 
 board = [1,2,3,4,5,6,7,8,9]
 
-WINS = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8,],[3,6,9],[1,5,9],
-[3,5,7]]
+# WINS = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8,],[3,6,9],[1,5,9],
+# [3,5,7]]
 ## ruby doc map (awin), board[index], uniq
 
 #DATA IN THE system
@@ -19,6 +19,11 @@ def greeting
   puts
   puts "Welcome to Tic Tac Toe"
   puts "Lets Play"
+  puts
+  puts "Player X enter your name"
+    playerX = gets.chomp.capitalize
+  puts "Player O enter your name"
+    playerO = gets.chomp.capitalize
   puts "Player X your up first!"
 end
 #binding.pry
@@ -32,49 +37,28 @@ def game_over?(current_player, board, turn_count)
 end
 
 def win?(board, current_player)
-      if board[0] == board[1] && board[1] == board[2]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
-      elsif board[3] == board[4] && board[4] == board[5]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
-      elsif board[6] == board[7] && board[7] == board[8]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
-      elsif board[0] == board[3] && board[3] == board[6]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
+  # if board[0..3] do each.chars
+  #   win=true
+   if board[0] == board[1] && board[1] == board[2]
+         win = true
+       elsif board[3] == board[4] && board[4] == board[5]
+         win = true
+       elsif board[6] == board[7] && board[7] == board[8]
+         win = true
+       elsif board[0] == board[3] && board[3] == board[6]
+           win = true
       elsif board[1] == board[4] && board[4] == board[7]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
+           win = true
       elsif board[2] == board[5] && board[5] == board[8]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
+           win = true
       elsif board[0] == board[4] && board[4] == board[8]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
-      elsif board[2] == board[4] && board[4] == board[6]
-          puts
-          puts "#{currentplayer} wins!"
-          win = true
-      else
-        win = false
-      end
-      win
+           win = true
+      else board[2] == board[4] && board[4] == board[6]
+           win = true
+         end
+    win = false
   end
 
-# def turn_count(board, turn)
-#   board
-#   turn = #number of strings in the array
-#   MAX_TURNS-turn
-# end
 # def tie?(turn_count)
 #   turn_count=0
 # end
@@ -84,16 +68,20 @@ def win?(board, current_player)
 #   end
 # end
 
-def tictactoe(board, current_player, space_number)
+def tictactoe(board)
   #If I track players and truns , don't need guesses
+  # puts "Player X enter your name"
+  #   playerX = gets.chomp.capitalize
+  # puts "Player O enter your name"
+  #   playerO = gets.chomp.capitalize
   players = {playerX:"X", playerO:"O"}
   current_player = players[:playerX]
   turn_count = 9
   greeting
   until game_over?(current_player,board,turn_count)#calls on invariant MAX_TURNS & WINS
     display_board(board)#this will be how show progress
-    space_number = turn(current_player, number)#when player picks
-    board[space_number-1]=current_player[:playerX]
+    space_number = turn(current_player,number)#when player picks
+    board[space_number-1]=current_player
     turn_count -= 1
     if current_player == players[:playerX]
       current_player = players[:playerO]
@@ -118,6 +106,6 @@ puts "Congrats! Player #{current_player} you won!"
 display_board(board)
 end
 #board[0] = "x"
-tictactoe(board,current_player,space_number)
+tictactoe(board)
 
 #binding.pry
