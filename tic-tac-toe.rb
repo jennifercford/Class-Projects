@@ -20,17 +20,16 @@ def greeting
   puts "Welcome to Tic Tac Toe"
   puts "Lets Play"
   puts
-  puts "Player X enter your name"
-    playerX = gets.chomp.capitalize
-  puts "Player O enter your name"
-    playerO = gets.chomp.capitalize
-  puts "Player X your up first!"
+  # puts "Player X enter your name"
+  #   playerX = gets.chomp.capitalize
+  # puts "Player O enter your name"
+  #   playerO = gets.chomp.capitalize
+  # puts "Player X your up first!"
 end
 #binding.pry
-def turn(current_player,number)
+def turn(current_player)
   puts "Player #{current_player} please pick a space"
   number = gets.chomp.to_i
-  number
 end
 def game_over?(current_player, board, turn_count)
   win?(current_player, board) || turn_count.zero?
@@ -80,7 +79,8 @@ def tictactoe(board)
   greeting
   until game_over?(current_player,board,turn_count)#calls on invariant MAX_TURNS & WINS
     display_board(board)#this will be how show progress
-    space_number = turn(current_player,number)#when player picks
+    #turn(current_player) = space_number
+    space_number = turn(current_player)#when player picks
     board[space_number-1]=current_player
     turn_count -= 1
     if current_player == players[:playerX]
